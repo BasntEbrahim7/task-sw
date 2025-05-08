@@ -121,10 +121,10 @@ import java.io.*;
          boolean hasNumber = false;
          boolean hasSpecial = false;
 
-         for (char ch : password.toCharArray()) {
-             if (Character.isUpperCase(ch)) hasUpper = true;
-             else if (Character.isDigit(ch)) hasNumber = true;
-             else if (!Character.isLetterOrDigit(ch)) hasSpecial = true;
+         for (char chr : password.toCharArray()) {
+             if (Character.isUpperCase(chr)) hasUpper = true;
+             else if (Character.isDigit(chr)) hasNumber = true;
+             else if (!Character.isLetterOrDigit(chr)) hasSpecial = true;
          }
 
          return hasUpper && hasNumber && hasSpecial;

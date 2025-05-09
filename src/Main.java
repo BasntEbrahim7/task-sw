@@ -60,7 +60,7 @@ class UserService {
         return hasUpper && hasNumber && hasSpecial;
     }
 
-    public void register() {
+    public void SignUp() {
         while (true) {
             System.out.print("Enter username (email): ");
             String username = scanner.nextLine();
@@ -115,7 +115,7 @@ public class Main {
             scanner.nextLine();
 
             switch (choice) {
-                case 1 : service.register();
+                case 1 : service.SignUp();
                 case 2 : service.login();
                 case 3 :
                     System.out.println("Goodbye!");

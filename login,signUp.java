@@ -20,7 +20,7 @@ class FileUserRepository {
         return getUser(username) != null;
     }
 
-    public void saveUser(User user) {
+    public void createUser(User user) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             writer.write(user.getUsername() + "," + user.getPassword());
             writer.newLine();
@@ -49,7 +49,7 @@ class UserService {
     private final FileUserRepository repository = new FileUserRepository();
     private final Scanner scanner = new Scanner(System.in);
 
-    public boolean isStrongPassword(String password) {
+    public boolean validatePassword(String password) {
         if (password.length() < 8) return false;
         boolean hasUpper = false, hasNumber = false, hasSpecial = false;
         for (char ch : password.toCharArray()) {
@@ -60,7 +60,7 @@ class UserService {
         return hasUpper && hasNumber && hasSpecial;
     }
 
-    public void SignUp() {
+    public void registerUser() {
         while (true) {
             System.out.print("Enter username (email): ");
             String username = scanner.nextLine();
@@ -75,11 +75,11 @@ class UserService {
                 System.out.println("User already exists.");
                 continue;
             }
-            if (!isStrongPassword(password)) {
+            if (!validatePassword(password)) {
                 System.out.println("Weak password.");
                 continue;
             }
-            repository.saveUser(new User(username, password));
+            repository.createUser(new User(username, password));
             System.out.println("Signup successful.");
             break;
         }
@@ -115,7 +115,7 @@ public class Main {
             scanner.nextLine();
 
             switch (choice) {
-                case 1 : service.SignUp();
+                case 1 : service.registerUser();
                 case 2 : service.login();
                 case 3 :
                     System.out.println("Goodbye!");
